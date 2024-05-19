@@ -1,3 +1,7 @@
+/*
+https://youtu.be/hKI93hOfeIk?si=zr4sbs59dH319Rb5
+https://youtu.be/MFhxShGxHWc?si=5dTXJ8Qwz0sbOQvG
+*/
 class BinarySearch {
 	public static void main(String[] args) {
 		int[] arr = {0, 1,2,3,4,5,6,7,8,9};
