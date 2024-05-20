@@ -1,38 +1,68 @@
 class MergeSort {
-	public static void main(String[] args) {
-		int[] arr = {1,14,8,7,6,78,65,74,61,73,68,5,76};
-		int[] aux = new int[arr.length];
+	public static void main(String [] args) {
+		int []arr = {1,3,8,4,5,6,7,38,9,61,53,84,73,18,2,75,64};
 		
-		System.out.println("arr valures: ");
+		System.out.println("arr values: ");
 		for(int i=0; i< arr.length; i++) System.out.println(arr[i]);
 		
-		mergeSort(arr, aux, 0, arr.length-1);
+		mergeSort(arr, 0, arr.length-1);
 		
-		System.out.println("sorted valures: ");
+		System.out.println("sorted values: ");
 		for(int i=0; i< arr.length; i++) System.out.println(arr[i]);
 	}
 	
-	private static void mergeSort(int[] arr, int[] aux, int ini, int end) {
+	private static void mergeSort(int []arr, int ini, int end) {
 		if(ini < end) {
-			int mid = (int) (ini+end)/2;
+			int mid = ini+(end-ini)/2;
 			
-			mergeSort(arr, aux, ini, mid);
-			mergeSort(arr, aux, mid+1, end);
-			intercalar(arr, aux, ini, mid, end);
+			mergeSort(arr, ini, mid);
+			mergeSort(arr, mid+1, end);
+			
+			merge(arr, ini, mid, end);
 		}
 	}
 	
-	private static void intercalar(int[] arr, int[] aux, int ini, int mid, int end) {
-		for(int k=0; k<=end; k++) aux[k] = arr[k];
+	private static void merge(int []arr, int ini, int mid, int end) {
+		int lSize = mid-ini+1;
+		int rSize = end-mid;
+		int []left = new int[lSize];
+		int []right = new int[rSize];
 		
-		int i = ini;
-		int j = mid+1;
-		
-		for(int k=ini; k<=end; k++) {
-			if(i > mid) arr[k] = aux[j++];
-			else if(j> end) arr[k] = aux[i++];
-			else if(aux[i] < aux[j]) arr[k] = aux[i++];
-			else arr[k] = aux[j++];
+		for(int i=0; i<lSize; i++) {
+			left[i] = arr[ini+i];
 		}
+		
+		for(int j=0; j<rSize; j++) {
+			right[j] = arr[mid+1+j];
+		}
+		
+		int i = 0;
+		int j = 0;
+		int k = ini;
+		
+		while(i < lSize && j < rSize) {
+			if(left[i] <= right[j]){
+				arr[k] = left[i];
+				i++;
+			} else {
+				arr[k] = right[j];
+				j++;
+			}
+			k++;
+		}
+		
+		while(i < lSize) {
+			arr[k] = left[i];
+			i++;
+			k++;
+		}
+		
+		while(j < rSize) {
+			arr[k] = right[j];
+			j++;
+			k++;
+		}
+		
+		
 	}
 }
