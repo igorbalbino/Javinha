@@ -10,7 +10,7 @@ class SortsTraning {
 		//quickSort(arr, 0, arr.length-1);
 		
 		//heap
-		int tam = arr.length;
+		/*int tam = arr.length;
 		for(int i=tam/2-1; i>=0; i--) heapSort(arr, tam, i);
 		
 		for(int i=tam-1; i>0; i--) {
@@ -19,8 +19,9 @@ class SortsTraning {
 			arr[i] = temp;
 			
 			heapSort(arr, i, 0);
-		}
+		}*/
 		
+		mergeSort(arr, 0, arr.length-1);
 		
 		System.out.println("sorted valurs: ");
 		for(int i=0; i<arr.length; i++) System.out.println(arr[i]);
@@ -70,6 +71,54 @@ class SortsTraning {
 			arr[raiz] = temp;
 			
 			heapSort(arr, tam, raiz);
+		}
+	}
+	
+	private static void mergeSort(int [] arr, int ini, int end) {
+		if(ini<end) {
+			int mid = (ini+end)/2;
+			
+			mergeSort(arr, ini, mid);
+			mergeSort(arr, mid+1, end);
+			
+			merge(arr, ini, mid, end);
+		}
+	}
+	
+	private static void merge(int [] arr, int ini, int mid, int end) {
+		int leftSize = mid-ini+1;
+		int rightSize = end-mid;
+		int []left = new int[leftSize];
+		int [] right = new int[rightSize];
+		
+		for(int i=0; i<leftSize; i++) left[i] = arr[ini+i];
+		for(int i=0; i<rightSize; i++) right[i] = arr[mid+1+i];
+		
+		int i = 0;
+		int j = 0;
+		int k = ini;
+		
+		while(i<leftSize && j<rightSize) {
+			if(left[i] <= right[j]) {
+				arr[k] = left[i];
+				i++;
+			} else {
+				arr[k] = right[j];
+				j++;
+			}
+			k++;
+		}
+		
+		while(i < leftSize) {
+			arr[k] = left[i];
+			i++;
+			k++;
+		}
+		
+		while(j < rightSize) {
+			arr[k] = right[j];
+			j++;
+			k++;
 		}
 	}
 }
